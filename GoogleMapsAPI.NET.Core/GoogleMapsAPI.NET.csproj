@@ -102,6 +102,7 @@
     <Compile Include="API\Geometry\Extensions\GeometryExtensions.cs" />
     <Compile Include="API\Geometry\GeometryAPI.cs" />
     <Compile Include="API\Geometry\Types\SphericalGeometry.cs" />
+    <Compile Include="API\Places\Components\LocationBias.cs" />
     <Compile Include="API\Places\Components\PlaceAlternativeId.cs" />
     <Compile Include="API\Places\Components\PlaceAspectRating.cs" />
     <Compile Include="API\Places\Components\PlaceDetailsOpeningHours.cs" />
@@ -114,6 +115,10 @@
     <Compile Include="API\Places\Components\PlacePredictionTerm.cs" />
     <Compile Include="API\Places\Components\PlaceReview.cs" />
     <Compile Include="API\Places\Components\Premium\PlacePremiumAspectRating.cs" />
+    <Compile Include="API\Places\Enums\FindPlaceFieldsEnum.cs" />
+    <Compile Include="API\Places\Enums\FindPlaceInputTypeEnum.cs" />
+    <Compile Include="API\Places\Responses\DebugLog.cs" />
+    <Compile Include="API\Places\Responses\FindPlaceResponse.cs" />
     <Compile Include="API\Places\Responses\PlaceAutocompleteResponse.cs" />
     <Compile Include="API\Places\Responses\PlacePhotoResponse.cs" />
     <Compile Include="API\Places\Responses\PlaceQueryAutoCompleteResponse.cs" />

@@ -3,6 +3,7 @@ using System.Drawing.Imaging;
 using FluentAssertions;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
+using GoogleMapsAPI.NET.API.Places.Components;
 using GoogleMapsAPI.NET.API.Places.Enums;
 using GoogleMapsAPI.NET.Extensions;
 using GoogleMapsAPI.NET.Requests;
@@ -23,6 +24,96 @@ namespace GoogleMapsAPI.NET.Tests.API.Places
 
         #region Test methods
 
+        /// <summary>
+        /// Test places text search
+        /// </summary>
+        [TestMethod]
+        public void TestFindPlace()
+        {
+            using (var client = GetMockedAPIClient())
+            {
+                // Arrange mocks for places search results
+                var webMocks = client.ArrangeWebResponseValidPlacesSearchResultMocks();
+
+                // Make client call
+                client.Places.FindPlace(
+                    "Microsoft",
+                    FindPlaceInputTypeEnum.TextQuery,
+                    locationBias: LocationBias.Circular(10000, new GeoCoordinatesLocation(37.4170586,-122.0757685)));
+
+                // Assertions
+                webMocks.WebRequestUtil.AssertGetWasCalledOnceWithUrl(
+                    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Microsoft&inputtype=textquery&locationbias=circle%3A10000%4037.4170586%2C-122.0757685");                        
+            }
+
+            using (var client = GetMockedAPIClient())
+            {
+                // Arrange mocks for places search results
+                var webMocks = client.ArrangeWebResponseValidPlacesSearchResultMocks();
+
+                // Make client call
+                client.Places.FindPlace(
+                    "Museum of Contemporary Art Australia",
+                    FindPlaceInputTypeEnum.TextQuery,
+                    fields: new[]
+                    {
+                        FindPlaceFieldsEnum.photos,
+                        FindPlaceFieldsEnum.formatted_address,
+                        FindPlaceFieldsEnum.name,
+                        FindPlaceFieldsEnum.rating,
+                        FindPlaceFieldsEnum.opening_hours,
+                        FindPlaceFieldsEnum.geometry
+                    });
+
+                // Assertions
+                webMocks.WebRequestUtil.AssertGetWasCalledOnceWithUrl(
+                    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum+of+Contemporary+Art+Australia&inputtype=textquery&fields=photos%2Cformatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry");
+            }
+
+            using (var client = GetMockedAPIClient())
+            {
+                // Arrange mocks for places search results
+                var webMocks = client.ArrangeWebResponseValidPlacesSearchResultMocks();
+
+                // Make client call
+                client.Places.FindPlace(
+                    "Mongolian Grill",
+                    FindPlaceInputTypeEnum.TextQuery,
+                    fields: new[]
+                    {
+                        FindPlaceFieldsEnum.photos,
+                        FindPlaceFieldsEnum.formatted_address,
+                        FindPlaceFieldsEnum.name,
+                        FindPlaceFieldsEnum.opening_hours,
+                        FindPlaceFieldsEnum.rating
+                    },
+                    locationBias: LocationBias.Circular(2000, 47.6918452, -122.2226413));
+
+                // Assertions
+                webMocks.WebRequestUtil.AssertGetWasCalledOnceWithUrl(
+                    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Mongolian+Grill&inputtype=textquery&fields=photos%2Cformatted_address%2Cname%2Copening_hours%2Crating&locationbias=circle%3A2000%4047.6918452%2C-122.2226413");
+            }
+
+            using (var client = GetMockedAPIClient())
+            {
+                // Arrange mocks for places search results
+                var webMocks = client.ArrangeWebResponseValidPlacesSearchResultMocks();
+
+                // Make client call
+                client.Places.FindPlace(
+                    "+61293744000",
+                    FindPlaceInputTypeEnum.PhoneNumber,
+                    fields: new[]
+                    {
+                        FindPlaceFieldsEnum.place_id
+                    });
+
+                // Assertions
+                webMocks.WebRequestUtil.AssertGetWasCalledOnceWithUrl(
+                    "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%2B61293744000&inputtype=phonenumber&fields=place_id");
+            }
+        }
+        
         /// <summary>
         /// Test places text search
         /// </summary>

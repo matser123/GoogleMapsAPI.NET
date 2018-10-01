@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GoogleMapsAPI.NET.API.Client;
 using GoogleMapsAPI.NET.API.Common;
 using GoogleMapsAPI.NET.API.Common.Components.Locations.Interfaces;
+using GoogleMapsAPI.NET.API.Places.Components;
 using GoogleMapsAPI.NET.API.Places.Enums;
 using GoogleMapsAPI.NET.API.Places.Responses;
 using GoogleMapsAPI.NET.Extensions;
@@ -32,6 +32,38 @@ namespace GoogleMapsAPI.NET.API.Places
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// A Find Place request takes a text input, and returns a place. 
+        /// The text input can be any kind of Places data, for example, a name, address, or phone number.
+        /// </summary>
+        /// <param name="input">The text input specifying which place to search for (for example, a name, address, or phone number).</param>
+        /// <param name="inputType">The type of input. This can be one of either textquery or phonenumber. 
+        ///     Phone numbers must be in international format (prefixed by a plus sign ("+"), 
+        ///     followed by the country code, then the phone number itself). 
+        /// </param>
+        /// <param name="language">The language code, indicating in which language the results should be returned, if possible.</param>
+        /// <param name="fields">The fields specifying the types of place data to return, separated by a comma.</param>
+        /// <param name="locationBias">Prefer results in a specified area, by specifying either a radius plus lat/lng, or 
+        ///     two lat/lng pairs representing the points of a rectangle.  If this parameter is not specified, the API uses 
+        ///     IP address biasing by default.</param>
+        public FindPlaceResponse FindPlace(string input, FindPlaceInputTypeEnum inputType, 
+            string language = null, FindPlaceFieldsEnum[] fields = null, LocationBias locationBias = null)
+        {
+            var queryParams = new QueryParams
+            {
+                ["input"] = input,
+                ["inputtype"] = inputType.GetSerializationName()
+            };
+            
+            if (language != null) queryParams["language"] = language;
+            if (fields != null) queryParams["fields"] = string.Join(",", fields);            
+            if (locationBias != null) queryParams["locationbias"] = locationBias.ToString();
+
+            var response = Client.APIGet<FindPlaceResponse>("/maps/api/place/findplacefromtext/json", queryParams);
+
+            return response;
+        }
 
         /// <summary>
         /// Lets you search for places within a specified area. 
