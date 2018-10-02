@@ -16,13 +16,13 @@ namespace GoogleMapsAPI.NET.API.Places.Components
         /// When the place opens
         /// </summary>
         [DataMember(Name = "open")]
-        public List<PlaceOpeningPeriodDayTime> Open { get; set; }
+        public PlaceOpeningPeriodDayTime Open { get; set; }
 
         /// <summary>
         /// When the place closes
         /// </summary>
         [DataMember(Name = "close")]
-        public List<PlaceOpeningPeriodDayTime> Close { get; set; }
+        public PlaceOpeningPeriodDayTime Close { get; set; }
 
         #endregion
 
