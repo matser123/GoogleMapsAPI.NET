@@ -219,7 +219,7 @@ namespace GoogleMapsAPI.NET.API.Places.Enums
         [EnumMember(Value = "general_contractor")]
         GeneralContractor,
         /// <summary>
-        /// Grocery or supermarket
+        /// Grocery or supermarket (deprecated)
         /// </summary>
         [EnumMember(Value = "grocery_or_supermarket")]
         GroceryOrSupermarket,
@@ -653,5 +653,10 @@ namespace GoogleMapsAPI.NET.API.Places.Enums
         /// </summary>
         [EnumMember(Value = "subpremise")]
         Subpremise,
+        /// <summary>
+        /// Supermarket
+        /// </summary>
+        [EnumMember(Value = "supermarket")]
+        Supermarket,
     }
 }
