@@ -660,7 +660,7 @@ namespace GoogleMapsAPI.NET.API.Places.Enums
         Supermarket,
 
         /// <summary>
-        /// Supermarket
+        /// LightRailStation
         /// </summary>
         [EnumMember(Value = "light_rail_station")]
         LightRailStation,
