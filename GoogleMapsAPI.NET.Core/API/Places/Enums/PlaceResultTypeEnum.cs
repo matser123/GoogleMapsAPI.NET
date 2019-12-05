@@ -664,5 +664,11 @@ namespace GoogleMapsAPI.NET.API.Places.Enums
         /// </summary>
         [EnumMember(Value = "light_rail_station")]
         LightRailStation,
+
+        /// <summary>
+        /// Drugstore
+        /// </summary>
+        [EnumMember(Value = "drugstore")]
+        Drugstore,
     }
 }
